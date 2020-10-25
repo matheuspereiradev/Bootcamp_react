@@ -15,8 +15,15 @@ function App() {
     })
   },[])
 
-  function adcProjeto(){
-    setProjetos([...projetos,`cat ${Date.now()}`])
+  async function adcProjeto(){
+    //setProjetos([...projetos,`cat ${Date.now()}`])
+
+    const res=await api.post('projetos',{
+      nome:`Projeto ${Date.now()}`,
+      valor:Math.floor(Math.random() * 10)*142,
+    })
+
+    setProjetos([...projetos,res.data])
   }
 
   return (
@@ -29,7 +36,11 @@ function App() {
         </ul>
       </Cabecalho>
 
-      <button type="button" onClick={adcProjeto}>Nova</button>   
+      
+          <button type="button" onClick={adcProjeto}>Nova</button> 
+     
+
+        
      
       <Rodape empresa="Volpi" />
     </>
